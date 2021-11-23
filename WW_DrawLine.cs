@@ -18,6 +18,11 @@ namespace WhiteWolf {
         public float interval = 0;
         public Color color;
 
+        [Space]
+
+        public float dis;
+        public Color disColor;
+
     }
 
     [System.Serializable]
@@ -33,9 +38,6 @@ namespace WhiteWolf {
         [Range( 0, 1 )]
         public float interval = 0;
         public Color color;
-
-        [Space]
-
 
         [Space]
 
@@ -55,7 +57,7 @@ namespace WhiteWolf {
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
-        Color _color;
+        public Color _color;
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
@@ -67,8 +69,18 @@ namespace WhiteWolf {
 
                     startEnd[ i ].name = $"{ startEnd[ i ].start.name } and { startEnd[ i ].end.name }";
 
-                    startEnd[ i ].color = new Color( startEnd[ i ].color.r, startEnd[ i ].color.g, startEnd[ i ].color.b, 255 );
-                    Debug.DrawLine( startEnd[ i ].start.transform.position, startEnd[ i ].end.transform.position, startEnd[ i ].color, startEnd[ i ].interval );
+                    if ( Vector2.Distance( startEnd[ i ].start.transform.position, startEnd[ i ].end.transform.position ) <= startEnd[ i ].dis ){
+
+                        _color = new Color( startEnd[ i ].disColor.r, startEnd[ i ].disColor.g, startEnd[ i ].disColor.b, 255 );
+
+                    }
+                    else {
+
+                        _color = new Color( startEnd[ i ].color.r, startEnd[ i ].color.g, startEnd[ i ].color.b, 255 );
+
+                    }
+
+                    Debug.DrawLine( startEnd[ i ].start.transform.position, startEnd[ i ].end.transform.position, _color, startEnd[ i ].interval );
 
                 }
 
